@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+ext {
+    javaMainClass = "com.github.taurvi.valor.Main"
+}
+
+application {
+    mainClassName = javaMainClass
+}
+
+jar {
+    manifest {
+        attributes(
+                "Main-Class": javaMainClass
+        )
+    }
+}
+
+task runWithJavaExec(type: JavaExec) {
+    group = "Execution"
+    description = "Run the main class with JavaExecTask"
+    classpath = sourceSets.main.runtimeClasspath
+    main = javaMainClass
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Lombok
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    testCompileOnly 'org.projectlombok:lombok:1.18.12'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
+    compile 'com.vdurmont:emoji-java:5.1.1'
+    implementation 'com.google.inject:guice:4.2.3'
+    implementation 'org.javacord:javacord:3.0.5'
+    implementation 'org.mongodb:mongodb-driver-sync:4.0.1'
+    testImplementation 'org.assertj:assertj-core:3.15.0'
+    testImplementation 'org.mockito:mockito-core:3.3.3'
+    testImplementation 'junit:junit:4.12'
+}
